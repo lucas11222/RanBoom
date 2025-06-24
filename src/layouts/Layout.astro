@@ -1,22 +1,19 @@
+---
+import { Toaster } from "@/components/ui/sonner";
+import "@/styles/global.css";
+import 'sonner/dist/styles.css';
+---
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<title>RanBoom</title>
 	</head>
 	<body>
 		<slot />
+		<Toaster position="bottom-left" />
 	</body>
 </html>
-
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>

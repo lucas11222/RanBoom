@@ -1,11 +1,71 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle
+} from "@/components/ui/card";
+import {
+  Button
+} from "@/components/ui/button";
+import { Input } from '@/components/ui/input';
+import { app } from '@/../public/name.js';
 ---
-
 <Layout>
-	<Welcome />
+	<div class="flex items-center justify-center h-screen w-screen flex-col scrollbar-hide" id="thediv">
+		<Card className='w-100 h-auto items-center'>
+		<CardTitle className='text-center text-3xl'>RanBoom</CardTitle>
+		<CardFooter className='text-center'>Try drestroying the website pressing the button!</CardFooter>
+		<CardContent className=" justify-between hidden" id='thecontent'>
+			<p class="text-center text-[15px]" id="thetext">
+			</p>
+		  </CardContent>
+		  <CardContent className="flex justify-between gap-1" id='theinput'>
+			<Input type="name" placeholder="Name" id="username"/>
+			<Button type="submit" variant="outline">
+			  Enter
+			</Button>
+		</CardContent>
+		  <CardContent className="flex justify-between">
+			<Button id='thebutton' className='hidden'>Click me!</Button>
+		  </CardContent>
+		  <script type="module" is:inline>
+			const texts = [
+			  "Kabo- that didint happen.",
+			  "You still there?",
+			  "Man just give up",
+			  "*sleeps*",
+			  "Just use a macro at this point",
+			  "Still waiting....",
+			  "You know you can develop an entire app if you didn't click the button?",
+			  "I'm going to break your dreams. This is not going to get destroyed.",
+			  "404, Text Not found",
+			  "This is not going to kaboom",
+			  "Close this tab. Trust me",
+			  "Are you still here?",
+			  ""
+			];
+
+			const thebutton = document.getElementById("thebutton");
+			const thetext = document.getElementById("thetext");
+
+			thebutton?.addEventListener("click", () => {
+			  const indice = Math.floor(Math.random() * texts.length);
+			  thecontent.classList.remove("hidden");
+			  thecontent.classList.add("flex");
+			  const randomkaboom = Math.floor(Math.random() * 1000);
+			  if (randomkaboom < 999) {
+				thetext.textContent = "KABOOM! (cuando sienta el boom) the website has been deleted by !";
+				thebutton.style.display = "none";
+				theinput.style.display = "none";
+			  } else {
+				thetext.textContent = texts[indice];
+			  }
+			});
+		  </script>
+		<script type="module" src="/name.js"></script>
+		</Card>
+	</div>
 </Layout>
