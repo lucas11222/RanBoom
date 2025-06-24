@@ -11,7 +11,6 @@ import {
   Button
 } from "@/components/ui/button";
 import { Input } from '@/components/ui/input';
-import { app } from '@/../public/name.js';
 ---
 <Layout>
 	<div class="flex items-center justify-center h-screen w-screen flex-col scrollbar-hide" id="thediv">
@@ -31,7 +30,8 @@ import { app } from '@/../public/name.js';
 		  <CardContent className="flex justify-between">
 			<Button id='thebutton' className='hidden'>Click me!</Button>
 		  </CardContent>
-		  <script type="module" is:inline>
+		  <script>
+			import { gsap } from "gsap";
 			const texts = [
 			  "Kabo- that didint happen.",
 			  "You still there?",
@@ -45,23 +45,24 @@ import { app } from '@/../public/name.js';
 			  "This is not going to kaboom",
 			  "Close this tab. Trust me",
 			  "Are you still here?",
-			  ""
 			];
-
 			const thebutton = document.getElementById("thebutton");
 			const thetext = document.getElementById("thetext");
-
+			const thecontent = document.getElementById("thecontent");
+			let texttimeline = gsap.timeline();
 			thebutton?.addEventListener("click", () => {
 			  const indice = Math.floor(Math.random() * texts.length);
+			  texttimeline.to(thetext, {duration: 0.2, y: -10, ease: "power2.in"})
+			  .to(thetext, {duration: 0.1, y: 0, ease: "power2.out"})
 			  thecontent.classList.remove("hidden");
 			  thecontent.classList.add("flex");
 			  const randomkaboom = Math.floor(Math.random() * 1000);
-			  if (randomkaboom < 999) {
-				thetext.textContent = "KABOOM! (cuando sienta el boom) the website has been deleted by !";
+			  if (randomkaboom < 1) {
+				thetext.textContent = "KABOOM! (cuando sienta el boom) the website has been deleted by";
 				thebutton.style.display = "none";
-				theinput.style.display = "none";
 			  } else {
 				thetext.textContent = texts[indice];
+
 			  }
 			});
 		  </script>

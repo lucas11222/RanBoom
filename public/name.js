@@ -1,7 +1,6 @@
 import { getDatabase, ref, set, push, get, child } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { toast } from "sonner";
 // // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 console.log("Script cargado correctamente.");
@@ -40,11 +39,11 @@ window.addEventListener("DOMContentLoaded", () => {
   const nameInput = /** @type {HTMLInputElement} */ (document.getElementById("username"));  enterButton?.addEventListener("click", async () => {
     const name = nameInput?.value?.trim();
     if (!name) {
-      toast("Please enter a name.");
+      alert("Please enter a name.");
       return;
     }
     await writeToFirebase(name);
-    toast("Name submitted to Firebase!");
+    alert("Name submitted to Firebase!");
     Button.classList.remove("hidden")
   });
 });
@@ -57,14 +56,14 @@ async function writeToFirebase(name = "") {
     if (localUserId) {
       const snapshot = await get(child(dbRef, `users/${localUserId}`));
       if (snapshot.exists()) {
-        toast("User already exists.");
+        alert("User already exists.");
         return;
       }
     }
 
     await createNewUser(name);
   } catch (error) {
-    toast("Oh uh! Report this to Lucas11:", error);
+    alert("Oh uh! Report this to Lucas11:", error);
   }
 }
 
