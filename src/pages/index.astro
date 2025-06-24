@@ -51,9 +51,10 @@ import { Input } from '@/components/ui/input';
 			const thecontent = document.getElementById("thecontent");
 			let texttimeline = gsap.timeline();
 			thebutton?.addEventListener("click", () => {
+			  texttimeline.clear();
 			  const indice = Math.floor(Math.random() * texts.length);
-			  texttimeline.to(thetext, {duration: 0.2, y: -10, ease: "power2.in"})
-			  .to(thetext, {duration: 0.1, y: 0, ease: "power2.out"})
+			  texttimeline.to(thetext, {duration: 0.25, y: -10, ease: "power1.in"})
+			  .to(thetext, {duration: 0.25, y: 0, ease: "power1.out"})
 			  thecontent.classList.remove("hidden");
 			  thecontent.classList.add("flex");
 			  const randomkaboom = Math.floor(Math.random() * 1000);
