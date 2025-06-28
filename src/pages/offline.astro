@@ -14,33 +14,20 @@ import { Input } from '@/components/ui/input';
 <Layout>
 	<div class="flex items-center justify-center h-screen w-screen flex-col scrollbar-hide" id="thediv">
 		<Card className='w-100 h-auto items-center'>
-		<CardTitle className='text-center text-3xl'>RanBoom</CardTitle>
-		<CardFooter className='text-center'>Try drestroying the website pressing the button!</CardFooter>
+		<CardTitle className='text-center text-3xl'>RanBoom: Offline version</CardTitle>
+		<CardFooter className='text-center'>This is the offline version for when the normal version ends.</CardFooter>
 		<CardContent className=" justify-between hidden" id='thecontent'>
 			<p class="text-center text-[15px]" id="thetext">
 			</p>
 		  </CardContent>
-		  <CardContent className="flex justify-between gap-1" id='theinput'>
-			<Input type="name" placeholder="Name" id="username"/>
-			<Button type="submit" variant="outline">
-			  Submit
-			</Button>
-		</CardContent>
-		<CardContent className="flex gap-1" id='theinput'>
-			<p id="theusertext">Username: Null</p>
-		</CardContent>
 		<CardContent className="flex gap-1" id='theclicks'>
 			<p id="thecounter">Clicks: 0</p>
 		</CardContent>
 		  <CardContent className="flex justify-between">
-			<Button id='thebutton' className='hidden'>Click me!</Button>
-		  </CardContent>
-		  <CardContent className="flex justify-between">
-			<Button id='offline'>Offline version</Button>
+			<Button id='thebutton' className=''>Click me!</Button>
 		  </CardContent>
 		  <script>
 			import { gsap } from "gsap";
-			import { firebaseConfig, addCounter, deleteWebsite, isDeleted } from "../../public/name";
 			const texts = [
 			  "Kabo- that didint happen.",
 			  "You still there?",
@@ -58,18 +45,12 @@ import { Input } from '@/components/ui/input';
 			const thebutton = document.getElementById("thebutton");
 			const thetext = document.getElementById("thetext");
 			const thecontent = document.getElementById("thecontent");
-			const theofflinebutton = document.getElementById("offline");
-			const theofflinebutton = document.getElementById("offline");
-			theofflinebutton?.addEventListener("click", () => {
-			  window.location.href = "/offline";
-			});
+			const theclicks = document.getElementById("theclicks");
 			let texttimeline = gsap.timeline();
 			let clickCount = 0;
-			isDeleted();
 			thebutton?.addEventListener("click", () => {
 			  clickCount++;
-			  addCounter(clickCount);
-			  isDeleted();
+			  theclicks.textContent = `Clicks: ${clickCount}`;
 			  texttimeline.clear();
 			  const indice = Math.floor(Math.random() * texts.length);
 			  texttimeline.to(thetext, {duration: 0.25, y: -10, ease: "power1.inOut"})
@@ -81,13 +62,11 @@ import { Input } from '@/components/ui/input';
 			  if (randomkaboom < 1) {
 				thetext.textContent = `KABOOM! (cuando sienta el boom) the website has been deleted!`;
 				thebutton.style.display = "none";
-				deleteWebsite();
 			  } else {
 				thetext.textContent = texts[indice];
 			  }
 			});
 		  </script>
-		<script type="module" src="/name.js"></script>
 		</Card>
 	</div>
 </Layout>

@@ -3,9 +3,8 @@ import { getDatabase, ref, set, push, get, child } from "https://www.gstatic.com
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 // // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
-console.log("Script cargado correctamente.");
 // Your web app's Firebase configuration
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: "AIzaSyBxBYo8cjZ4Hy9CRtlY9y_vtCCk6EvFJZA",
   authDomain: "ranboom-71afe.firebaseapp.com",
   projectId: "ranboom-71afe",
@@ -15,18 +14,17 @@ const firebaseConfig = {
   databaseURL: "https://ranboom-71afe-default-rtdb.europe-west1.firebasedatabase.app" // ✅ Agrega esto
 };
 
-export const app = initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
 const dbRef = ref(db);
-const localUserId = localStorage.getItem("userId");
-const Button = document.getElementById('thebutton');
-
+export const localUserId = localStorage.getItem("userId");
+const thebutton = document.getElementById("thebutton");
 async function checkUser() {
   if (localUserId) {
     const snapshot = await get(child(dbRef, `users/${localUserId}`));
     if (snapshot.exists()) {
-      Button.classList.remove("hidden");
+      thebutton.classList.remove("hidden");
     }
   }
 }
@@ -36,22 +34,20 @@ checkUser();
 window.addEventListener("DOMContentLoaded", () => {
   const enterButton = document.querySelector('button[type="submit"]');
   const Button = document.getElementById('thebutton');
-  const nameInput = /** @type {HTMLInputElement} */ (document.getElementById("username"));  enterButton?.addEventListener("click", async () => {
+  const nameInput = /** @type {HTMLInputElement} */ (document.getElementById("username"));
+  enterButton?.addEventListener("click", async () => {
     const name = nameInput?.value?.trim();
     if (!name) {
       alert("Please enter a name.");
       return;
     }
-    await writeToFirebase(name);
+    const counter = 0;
+    await writeToFirebase(name, counter);
     alert("Name submitted to Firebase!");
-    Button.classList.remove("hidden")
+    Button.classList.remove("hidden");
   });
 });
-
-async function writeToFirebase(name = "") {
-  const dbRef = ref(db);
-  const localUserId = localStorage.getItem("userId");
-
+async function writeToFirebase(name, counter) {
   try {
     if (localUserId) {
       const snapshot = await get(child(dbRef, `users/${localUserId}`));
@@ -60,18 +56,105 @@ async function writeToFirebase(name = "") {
         return;
       }
     }
-
-    await createNewUser(name);
+    await createNewUser(name, counter);
   } catch (error) {
     alert("Oh uh! Report this to Lucas11:", error);
+    console.log(error);
   }
 }
 
-async function createNewUser(name = "") {
+
+async function createNewUser(name = "", counter = 0) {
   const userRef = push(ref(db, "users"));
   const newUserId = userRef.key;
 
   localStorage.setItem("userId", newUserId);
 
-  await set(userRef, { name });
+  await set(userRef, { name, counter });
 }
+async function getUserName() {
+  if (!localUserId) return null;
+  const snapshot = await get(child(dbRef, `users/${localUserId}`));
+  if (snapshot.exists()) {
+    const data = snapshot.val();
+    return data.name;
+  }
+  return null;
+}
+
+async function displayUserName() {
+  const theusertext = document.getElementById("theusertext");
+  const userName = await getUserName();
+  theusertext.textContent = `Username: ${userName || "Unknown"}`;
+}
+
+
+async function getCounter() {
+  const localUserId = localStorage.getItem("userId");
+  if (!localUserId) return null;
+  const snapshot = await get(child(dbRef, `users/${localUserId}`));
+  if (snapshot.exists()) {
+    const data = snapshot.val();
+    return data.counter;
+  }
+  return null;
+}
+
+async function displayCounter() {
+  const thecounter = document.getElementById("thecounter");
+  const count = await getCounter();
+  thecounter.textContent = `Clicks: ${count || "Unknown"}`;
+}
+
+export async function addCounter(counter = 0) {
+  const localUserId = localStorage.getItem("userId");
+  if (!localUserId) {
+    alert("User not found.");
+    return;
+  }
+
+  try {
+    const snapshot = await get(child(dbRef, `users/${localUserId}`));
+    if (snapshot.exists()) {
+      // Update the counter in Firebase
+      await set(ref(db, `users/${localUserId}/counter`), counter);
+      counter = snapshot.val().counter      // Update the counter in the UI
+      const thecounter = document.getElementById("thecounter");
+      thecounter.textContent = `Clicks: ${counter}`;
+    } else {
+      alert("User data not found.");
+    }
+  } catch (error) {
+    console.error("Error updating counter:", error);
+    alert("Failed to update counter. Please try again.");
+  }
+}
+
+export async function deleteWebsite() {
+  const localUserId = localStorage.getItem("userId");
+  if (!localUserId) return null;
+  const snapshot = await get(child(dbRef, "deleted"));
+  if (snapshot.exists()) {
+    await set(ref(db, `deleted`), true);
+  }
+}
+
+export async function isDeleted() {
+  const localUserId = localStorage.getItem("userId");
+  if (!localUserId) return null;
+  console.log(dbRef)
+  const snapshot = await get(child(dbRef, `deleted`));
+  if (snapshot.exists()) {
+    const data = snapshot.val();
+    if (data.deleted === true) {
+      const thetext = document.getElementById("thetext");
+      thetext.classList.remove("hidden");
+      thetext.textContent = `KABOOM! (cuando sienta el boom) the website has been deleted!`;
+      thebutton.style.display = "none";
+    }
+  }
+  return null;
+}
+
+displayUserName();
+displayCounter();
