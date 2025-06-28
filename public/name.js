@@ -119,8 +119,6 @@ export async function addCounter(counter = 0) {
       // Update the counter in Firebase
       await set(ref(db, `users/${localUserId}/counter`), counter);
       counter = snapshot.val().counter      // Update the counter in the UI
-      const thecounter = document.getElementById("thecounter");
-      thecounter.textContent = `Clicks: ${counter}`;
     } else {
       alert("User data not found.");
     }
