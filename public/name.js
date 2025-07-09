@@ -31,10 +31,27 @@ async function checkUser() {
 checkUser();
 
 
+export async function isDeleted() {
+  const snapshot = await get(child(dbRef, `deleted`));
+  if (snapshot.exists()) {
+    const data = snapshot.val();
+    if (data === true) {
+      const thecontent = document.getElementById("thecontent");
+      thecontent.classList.remove("hidden");
+      thetext.textContent = `KABOOM! (cuando sienta el boom) the website has been deleted!`;
+      const thebutton = document.getElementById("thebutton");
+      thebutton.style.display = "none";
+    }
+  }
+}
+
 window.addEventListener("DOMContentLoaded", () => {
   const enterButton = document.querySelector('button[type="submit"]');
   const Button = document.getElementById('thebutton');
   const nameInput = /** @type {HTMLInputElement} */ (document.getElementById("username"));
+  const thecounter = document.getElementById("thecounter");
+  const theusertext = document.getElementById("theusertext");
+  isDeleted();
   enterButton?.addEventListener("click", async () => {
     const name = nameInput?.value?.trim();
     if (!name) {
@@ -42,6 +59,8 @@ window.addEventListener("DOMContentLoaded", () => {
       return;
     }
     const counter = 0;
+    thecounter.textContent = `Clicks: ${counter}`;
+    theusertext.textContent = `Username: ${name}`;
     await writeToFirebase(name, counter);
     alert("Name submitted to Firebase!");
     Button.classList.remove("hidden");
@@ -103,7 +122,7 @@ async function getCounter() {
 async function displayCounter() {
   const thecounter = document.getElementById("thecounter");
   const count = await getCounter();
-  thecounter.textContent = `Clicks: ${count || "Unknown"}`;
+  thecounter.textContent = `Clicks: ${count || "0"}`;
 }
 
 export async function addCounter(counter = 0) {
@@ -135,23 +154,6 @@ export async function deleteWebsite() {
   if (snapshot.exists()) {
     await set(ref(db, `deleted`), true);
   }
-}
-
-export async function isDeleted() {
-  const localUserId = localStorage.getItem("userId");
-  if (!localUserId) return null;
-  console.log(dbRef)
-  const snapshot = await get(child(dbRef, `deleted`));
-  if (snapshot.exists()) {
-    const data = snapshot.val();
-    if (data.deleted === true) {
-      const thetext = document.getElementById("thetext");
-      thetext.classList.remove("hidden");
-      thetext.textContent = `KABOOM! (cuando sienta el boom) the website has been deleted!`;
-      thebutton.style.display = "none";
-    }
-  }
-  return null;
 }
 
 displayUserName();

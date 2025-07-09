@@ -40,7 +40,7 @@ import { Input } from '@/components/ui/input';
 		  </CardContent>
 		  <script>
 			import { gsap } from "gsap";
-			import { firebaseConfig, addCounter, deleteWebsite, isDeleted } from "../../public/name";
+			import {addCounter, deleteWebsite } from "../../public/name";
 			const texts = [
 			  "Kabo- that didint happen.",
 			  "You still there?",
@@ -58,17 +58,17 @@ import { Input } from '@/components/ui/input';
 			const thebutton = document.getElementById("thebutton");
 			const thetext = document.getElementById("thetext");
 			const thecontent = document.getElementById("thecontent");
+			const thecounter = document.getElementById("thecounter");
 			const theofflinebutton = document.getElementById("offline");
 			theofflinebutton?.addEventListener("click", () => {
 			  window.location.href = "/offline";
 			});
 			let texttimeline = gsap.timeline();
 			let clickCount = 0;
-			isDeleted();
 			thebutton?.addEventListener("click", () => {
 			  clickCount++;
 			  addCounter(clickCount);
-			  isDeleted();
+			  thecounter.textContent = `Clicks: ${clickCount}`;
 			  texttimeline.clear();
 			  const indice = Math.floor(Math.random() * texts.length);
 			  texttimeline.to(thetext, {duration: 0.25, y: -10, ease: "power1.inOut"})
@@ -77,7 +77,7 @@ import { Input } from '@/components/ui/input';
 			  thecontent.classList.add("flex");
 
 			  const randomkaboom = Math.floor(Math.random() * 1000);
-			  if (randomkaboom < 1) {
+			  if (randomkaboom < 999) {
 				thetext.textContent = `KABOOM! (cuando sienta el boom) the website has been deleted!`;
 				thebutton.style.display = "none";
 				deleteWebsite();

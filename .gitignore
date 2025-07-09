@@ -6,7 +6,7 @@ dist/
 
 # dependencies
 node_modules/
-
+wrangler.jsonc
 # logs
 npm-debug.log*
 yarn-debug.log*
