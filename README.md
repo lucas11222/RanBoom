@@ -6,3 +6,5 @@ Theres an chat for talking about the game, an leaderboard that shows all the top
 This was made with Astro, React, Tailwind, Shadcn and GSAP!
 
 Go to https://ranboom.altamiranolucas2013.workers.dev for seeing it!
+
+Made with 💖 by Lucas11.
