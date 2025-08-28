@@ -68,7 +68,7 @@ import { Input } from '@/components/ui/input';
 			thebutton?.addEventListener("click", () => {
 			  clickCount++;
 			  addCounter(clickCount);
-			  thecounter.textContent = `Clicks: ${clickCount}`;
+			  thecounter.textContent = `Clicks: ${clickCount}, cmon press it!`;
 			  texttimeline.clear();
 			  const indice = Math.floor(Math.random() * texts.length);
 			  texttimeline.to(thetext, {duration: 0.25, y: -10, ease: "power1.inOut"})

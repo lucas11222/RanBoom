@@ -1,4 +1,4 @@
-import { getDatabase, ref, set, push, get, child } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+import { getDatabase, ref, set, push, get, child, runTransaction } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 // // TODO: Add SDKs for Firebase products that you want to use
@@ -125,7 +125,7 @@ async function displayCounter() {
   thecounter.textContent = `Clicks: ${count || "0"}, cmon press it!`;
 }
 
-export async function addCounter(counter = 0) {
+export async function addCounter(delta = 1) {
   const localUserId = localStorage.getItem("userId");
   if (!localUserId) {
     alert("User not found.");
@@ -133,19 +133,27 @@ export async function addCounter(counter = 0) {
   }
 
   try {
-    const snapshot = await get(child(dbRef, `users/${localUserId}`));
-    if (snapshot.exists()) {
-      // Update the counter in Firebase
-      await set(ref(db, `users/${localUserId}/counter`), counter);
-      counter = snapshot.val().counter      // Update the counter in the UI
-    } else {
-      alert("User data not found.");
+    const counterRef = ref(db, `users/${localUserId}/counter`);
+
+    const result = await runTransaction(counterRef, (current) => {
+      const currentNum = typeof current === "number" ? current : 0;
+      return currentNum + delta;
+    });
+
+    if (!result.committed) {
+      throw new Error("Transaction not committed");
     }
+
+    const newValue = result.snapshot.val(); // valor nuevo del contador
+    // aquí puedes actualizar tu UI con newValue
+    return newValue;
   } catch (error) {
     console.error("Error updating counter:", error);
     alert("Failed to update counter. Please try again.");
   }
 }
+
+
 
 export async function deleteWebsite() {
   const localUserId = localStorage.getItem("userId");
