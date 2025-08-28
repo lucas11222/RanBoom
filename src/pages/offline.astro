@@ -13,18 +13,18 @@ import { Input } from '@/components/ui/input';
 ---
 <Layout>
 	<div class="flex items-center justify-center h-screen w-screen flex-col scrollbar-hide" id="thediv">
-		<Card className='w-100 h-auto items-center'>
-		<CardTitle className='text-center text-3xl'>RanBoom: Offline version</CardTitle>
-		<CardFooter className='text-center'>This is the offline version for when the normal version ends.</CardFooter>
-		<CardContent className=" justify-between hidden" id='thecontent'>
-			<p class="text-center text-[15px]" id="thetext">
+		<Card className='w-100 h-auto'>
+		<CardTitle className='ml-6'>RanBoom: Offline version</CardTitle>
+		<CardFooter>This is the offline version when you missed the online version :(</CardFooter>
+		<CardContent className="hidden" id='thecontent'>
+			<p class="text-[15px]" id="thetext">
 			</p>
 		  </CardContent>
 		<CardContent className="flex gap-1" id='theclicks'>
-			<p id="thecounter">Clicks: 0</p>
+			<p id="thecounter">Clicks: 0, cmon press it!</p>
 		</CardContent>
 		  <CardContent className="flex justify-between">
-			<Button id='thebutton' className=''>Click me!</Button>
+			<Button id='thebutton'>Click me!</Button>
 		  </CardContent>
 		  <script>
 			import { gsap } from "gsap";

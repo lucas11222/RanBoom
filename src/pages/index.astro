@@ -13,10 +13,10 @@ import { Input } from '@/components/ui/input';
 ---
 <Layout>
 	<div class="flex items-center justify-center h-screen w-screen flex-col scrollbar-hide" id="thediv">
-		<Card className='w-100 h-auto items-center'>
-		<CardTitle className='text-center text-3xl'>RanBoom</CardTitle>
-		<CardFooter className='text-center'>Try drestroying the website pressing the button!</CardFooter>
-		<CardContent className=" justify-between hidden" id='thecontent'>
+		<Card className='w-100 h-auto'>
+		<CardTitle className='ml-6'>RanBoom: V2!</CardTitle>
+		<CardFooter>Now with new UI!</CardFooter>
+		<CardContent className="justify-between hidden" id='thecontent'>
 			<p class="text-center text-[15px]" id="thetext">
 			</p>
 		  </CardContent>
@@ -26,17 +26,20 @@ import { Input } from '@/components/ui/input';
 			  Submit
 			</Button>
 		</CardContent>
-		<CardContent className="flex gap-1" id='theinput'>
-			<p id="theusertext">Username: Null</p>
+		<CardContent className="flex" id='theinput'>
+			<p id="theusertext">Username: None :(</p>
 		</CardContent>
-		<CardContent className="flex gap-1" id='theclicks'>
-			<p id="thecounter">Clicks: 0</p>
+		<CardContent className="flex" id='theclicks'>
+			<p id="thecounter">Clicks: 0, cmon press it!</p>
 		</CardContent>
-		  <CardContent className="flex justify-between">
-			<Button id='thebutton' className='hidden'>Click me!</Button>
+		  <CardContent className="hidden" id='thebuttondiv'>
+			<Button id='thebutton'>Click me!</Button>
+		  </CardContent>
+		  <CardContent className="flex">
+			<p>Made with 💖 by Lucas11</p>
 		  </CardContent>
 		  <CardContent className="flex justify-between">
-			<Button id='offline'>Offline version</Button>
+			<p>Missed the online version? <a href="/offline" class="text-cyan-600">Go to the ofline version!</a></p>
 		  </CardContent>
 		  <script>
 			import { gsap } from "gsap";
@@ -56,13 +59,10 @@ import { Input } from '@/components/ui/input';
 			  "Are you still here?",
 			];
 			const thebutton = document.getElementById("thebutton");
+			const thebuttondiv = document.getElementById("thebuttondiv");
 			const thetext = document.getElementById("thetext");
 			const thecontent = document.getElementById("thecontent");
 			const thecounter = document.getElementById("thecounter");
-			const theofflinebutton = document.getElementById("offline");
-			theofflinebutton?.addEventListener("click", () => {
-			  window.location.href = "/offline";
-			});
 			let texttimeline = gsap.timeline();
 			let clickCount = 0;
 			thebutton?.addEventListener("click", () => {
@@ -78,8 +78,8 @@ import { Input } from '@/components/ui/input';
 
 			  const randomkaboom = Math.floor(Math.random() * 1000);
 			  if (randomkaboom < 1) {
-				thetext.textContent = `KABOOM! (cuando sienta el boom) the website has been deleted!`;
-				thebutton.style.display = "none";
+				thetext.textContent = `KABOOM! (y se murio) the website has been deleted!`;
+				thebuttondiv.className = "none";
 				deleteWebsite();
 			  } else {
 				thetext.textContent = texts[indice];

@@ -38,16 +38,16 @@ export async function isDeleted() {
     if (data === true) {
       const thecontent = document.getElementById("thecontent");
       thecontent.classList.remove("hidden");
-      thetext.textContent = `KABOOM! (cuando sienta el boom) the website has been deleted!`;
-      const thebutton = document.getElementById("thebutton");
-      thebutton.style.display = "none";
+      thetext.textContent = `KABOOM! (y se murio) the website has been deleted!`;
+      const thebuttondiv = document.getElementById("thebuttondiv");
+      thebuttondiv.style.display = "none";
     }
   }
 }
 
 window.addEventListener("DOMContentLoaded", () => {
   const enterButton = document.querySelector('button[type="submit"]');
-  const Button = document.getElementById('thebutton');
+  const Button = document.getElementById('thebuttondiv');
   const nameInput = /** @type {HTMLInputElement} */ (document.getElementById("username"));
   const thecounter = document.getElementById("thecounter");
   const theusertext = document.getElementById("theusertext");
@@ -104,7 +104,7 @@ async function getUserName() {
 async function displayUserName() {
   const theusertext = document.getElementById("theusertext");
   const userName = await getUserName();
-  theusertext.textContent = `Username: ${userName || "Unknown"}`;
+  theusertext.textContent = `Username: ${userName || "None :("}`;
 }
 
 
@@ -122,7 +122,7 @@ async function getCounter() {
 async function displayCounter() {
   const thecounter = document.getElementById("thecounter");
   const count = await getCounter();
-  thecounter.textContent = `Clicks: ${count || "0"}`;
+  thecounter.textContent = `Clicks: ${count || "0"}, cmon press it!`;
 }
 
 export async function addCounter(counter = 0) {
