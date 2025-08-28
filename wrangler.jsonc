@@ -1,0 +1,26 @@
+{
+    "$schema": "node_modules/wrangler/config-schema.json",
+    "name": "ranboom",
+    "main": "./dist/_worker.js/index.js",
+    // Update to today's date
+    "compatibility_date": "2025-03-25",
+    "compatibility_flags": ["nodejs_compat"],
+    "assets": {
+      "binding": "ASSETS",
+      "directory": "./dist"
+    },
+    "observability": {
+      "enabled": true
+    },
+    "vars": {
+        "FIREBASE_PRIVATE_KEY_ID": "1df78236aeadb3c18af359f0e63ace5c4e63871b",
+        "FIREBASE_PRIVATE_KEY": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCMtHGnJFVKGg1d\nR/eurvk0sqn4/6+jIZsmIv/pfRUb5ln7/otraS46guaeE8xtlftK4IBo8U+IXX4s\ntHhTJWbDFVxZ3IWxv+buZ8hnYQQx43yrQ6GKtZTwIj+FyHSKwsRJk4yvSOA6bmZa\n9p6rP28N4i+CxZRiFxR+i8k7UEfuMNot0SqNz/W/KBlZVjhw98ZhgAp5k6iDNs0x\nH4C9hLoxUZYoupTy80gS9L1N6RGgwjOelPNeVqD6KbFsbyzto8pSWhX5wW2v/oQU\nxRKi15KIeV/osesHAyP6o3n4ar/RUNciKcEoR23w5jWr9B6GIN2uMe/w6uDRMtU5\nY+WXUJDdAgMBAAECggEABLBeuTs0vGtx1pH3ZxLdqyvpDis3JzCPgw3XiWhps6xR\ng1xQORwgNkL2fH4caep9nVkt7lFcXScAdWzuNZchfY7QrQ30RqAmiftbalaJVUBH\nf02ZrI2wkPATPdoYSCeFcw4/uferwUa8knt1fi92+/d1rd33u+0Y+b6eziM2wnFB\nrVmnHMai9MQiw6kOMcb7rQqxgwLIr0vg6HWTsJDi6gIVzTGIcl1aAl8N8lkRNaTB\n2C9Z+WBIXa0nZ3pBs/k3GKqGSInybIQ1Vu+8FUEln4M46HcnaE5HdeX7b1DZI9/j\nQkTvqurQVxm8dt1FWRpCdWZVI+QhPZ/7oo7huBHK4QKBgQDA6kQYXhe3UvhSXGKU\n0MFhfvPx9SZt4zpqzOTllw1yImfo67DawbefHlPx7nuhYX59wQryqgOHkCSI24oe\nIkzfqx3BFeuvnPQ8i5CqO7Y4Gs3mliJSgyGbkQ3nQo6as1X7xb7u5RjoHyljCglg\nVZ6qF9aTi2e7M87HA0o8lht+qwKBgQC6t3BqhGERA0R2XgcdMtQ7JzFOPKffa+A6\nf5nEoMWkjduiEfsAEKusvS1qn08DnyazaR7ZPAfgc7Aq1heOiGsv0x5yick0aIin\nwN+ohXZZadHfGko3/g6SPN9/VbWlCEqqWKS7xixD9DCu7atr3CizKIzDSTtHKtgv\nq/WGboKOlwKBgCB6D9auWH3DWQy8gtgcwMGCFt1f8QVE4LvEHLDOGjRhuG6M5ywc\nuqXt/CHZjTSg7iOLkSVDG+8BhDUKCJmEGr741rx/zTq2SKO8tzEBdm7BjHJKSiLr\n8od3Bwksukcu88W8B6W+KdBCFryWnvd50ok+FCCosmDgmuoEEsZaWuybAoGAdbxo\nEXKJ9n1V9UGTQNElTGuJRqkuvc47JQgDAR7TodCltsuZt0/LwO/FLJ9p5oG7mJPn\nlNmqqdipNEmtrv3MgOqiH11M11Q3H3iaT5xgpT75zLG6LRZxP7tMvvFfycGxuzqM\nHa93iB35eMR7PFcl/trJ7/ZEf7q/eUf4WR1kC98CgYEAhI00a72VQzudy60q4SVC\nwrexBDr3JZ4uDugWCV5Ee78FUTxNdaJo0c4v1LMgY8as/qc0W2WJkiH59csj1Syi\nzVYcPGp9QmWr0sBcpiV9ZiDJVM2kw34R9jZimSSZoWgyPq056L3L0r7ZVL17dZOb\nCNxQMW/BqX62sHZMA+ddS/c=\n-----END PRIVATE KEY-----\n",
+        "FIREBASE_PROJECT_ID": "1:823309590446:web:ef0f3b8831c9b2faa0f23f",
+        "FIREBASE_CLIENT_EMAIL": "firebase-adminsdk-fbsvc@ranboom-71afe.iam.gserviceaccount.com",
+        "FIREBASE_CLIENT_ID": "112014974700221744585",
+        "FIREBASE_AUTH_URI": "https://accounts.google.com/o/oauth2/auth",
+        "FIREBASE_TOKEN_URI": "https://oauth2.googleapis.com/token",
+        "FIREBASE_AUTH_CERT_URL": "https://www.googleapis.com/oauth2/v1/certs",
+        "FIREBASE_CLIENT_CERT_URL": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-fbsvc%40ranboom-71afe.iam.gserviceaccount.com"
+    }
+    }
