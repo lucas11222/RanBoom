@@ -19,7 +19,7 @@ const db = getDatabase(app);
 
 const dbRef = ref(db);
 export const localUserId = localStorage.getItem("userId");
-const thebutton = document.getElementById("thebutton");
+const thebutton = document.getElementById("thebuttondiv");
 async function checkUser() {
   if (localUserId) {
     const snapshot = await get(child(dbRef, `users/${localUserId}`));
